@@ -25,4 +25,3 @@ plt.legend(frameon=True, framealpha=0.75)
 print "Done"
 plt.show()
 plt.savefig("img.png")
-

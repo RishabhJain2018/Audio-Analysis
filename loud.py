@@ -1,17 +1,9 @@
-# import librosa
-
-# filename =  "1.mp4"
-# y, sr = librosa.load(filename)
-
-# fft_freq = librosa.core.fft_frequencies()
-
-
 import numpy as np
 from scipy.fftpack import fft
 from scipy.io import wavfile # get the api
 fs, data = wavfile.read('1.wav') # load the data
 import librosa
-
+import math
 
 print "**************fs**********", fs
 print "*************data***********", data.shape
@@ -21,10 +13,26 @@ c = fft(a) # calculate fourier transform (complex numbers list)
 # np.savetxt('c.txt', c)
 # print "**************/*a*************", c.shape
 aw = librosa.A_weighting(c)
+magnitude = np.absolute(aw)
+# np.savetxt("magnitude.txt", magnitude)
+rms = librosa.feature.rmse(magnitude)
+print rms.shape
+np.savetxt('rms.txt', rms)
+
+
+
+
 # np.savetxt('aw.txt', aw)
-for i in aw:
-	magnitude = np.sqrt(i[0]**2 + i[1]**2)
-	np.savetxt('magnitude.txt', magnitude)
+# for i in aw:
+# 	print i.split('+')
+	# print i
+	# values = i[0]**2 + i[1]**2
+	# values = math.pow(i[0], 2) + math.pow(i[1].split('j'), 2)
+	# magnitude = math.sqrt(values)
+	# print magnitude
+
+
+	# np.savetxt('magnitude.txt', magnitude)
 
 
 

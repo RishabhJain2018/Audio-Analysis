@@ -12,28 +12,20 @@ base_path_no_loud = "/home/rishabh/Documents/iAugmentor/AudioAnalysis/scripts/no
 loud_audios = listdir('/home/rishabh/Documents/iAugmentor/AudioAnalysis/scripts/loud')
 no_loud_audios = listdir('/home/rishabh/Documents/iAugmentor/AudioAnalysis/scripts/no_loud')
 
-i=0
 for audio in loud_audios :
 	fs, data = wavfile.read(base_path_loud + audio) # load the data
-	# np.savetxt(str(audio)+".txt", data)
-	# absolute_value = np.absolute(data) # calculate absolute values of channels
-	data_square = data**2
-	np.savetxt(str(audio)+".txt", data_square)
-	mean_value = np.mean(data_square)
-	print "Loud Audio value "+ str(audio)+ "  : ", mean_value 
-	i+=1
+	absolute = np.absolute(data) # calculate absolute values of channels
+	mean = np.mean(absolute)
+	print "Loud Audio value "+ str(audio)+ "  : ", mean 
 
 print "******************************************************************"
 print "=================================================================="
 
 for audio in no_loud_audios:
 	fs, data = wavfile.read(base_path_no_loud + audio) # load the data
-	# absolute_value = np.absolute(data) # calculate absolute values of channels
-	data_square = data**2
-	np.savetxt(str(audio)+"no_loud.txt", data_square)
-	mean_value = np.mean(data_square)
-	print "No Loud Audio value "+ str(audio)+ "  : ", mean_value
-
+	absolute = np.absolute(data) # calculate absolute values of channels
+	mean = np.mean(absolute)
+	print "No Loud Audio value "+ str(audio)+ "  : ", mean 
 
 # i=0
 # while i < 2:

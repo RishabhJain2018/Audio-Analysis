@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 base_path_loud = "/home/rishabh/Documents/iAugmentor/AudioAnalysis/scripts/loud5/mp3/"
 base_path_no_loud = "/home/rishabh/Documents/iAugmentor/AudioAnalysis/scripts/no_loud4/mp3/"
 
+file1 =open('/home/rishabh/Documents/iAugmentor/AudioAnalysis/scripts/results/result_file_loud_without_break.csv', 'w')
+file2 = open('/home/rishabh/Documents/iAugmentor/AudioAnalysis/scripts/results/result_file_not_loud_without_break.csv', 'w')
 
 loud_audios = listdir('/home/rishabh/Documents/iAugmentor/AudioAnalysis/scripts/loud5/mp3')
 no_loud_audios = listdir('/home/rishabh/Documents/iAugmentor/AudioAnalysis/scripts/no_loud4/mp3')
@@ -16,16 +18,15 @@ no_loud_audios = listdir('/home/rishabh/Documents/iAugmentor/AudioAnalysis/scrip
 average_values = np.array((0), dtype='float64')
 for audio in loud_audios :
 	data, fs = librosa.load(base_path_loud+audio)
-	# fs, data = wavfile.read(base_path_loud+audio)
-	# np.savetxt(str(audio)+".txt", data)
 	absolute_value = np.absolute(data, dtype='float64') # calculate absolute values of channels
 	data_square = absolute_value**2
-	# np.savetxt(str(audio)+".txt", data_square)
 	mean_value = np.mean(data_square)
 	print "Loud Audio value : "+ str(audio)+ "  : ", mean_value
+	file1.write("Loud audio value :"+str(audio)+" : %f" %mean_value)
+	file1.write("\n")
 	average_values = np.append(average_values, mean_value)
-	# print average_values
 
+file1.close()
 avg1 = np.mean(average_values)
 print "******************************************"
 print "The average of all the loud means is : ",avg1 
@@ -51,9 +52,12 @@ for audio in no_loud_audios:
 	# np.savetxt(str(audio)+"no_loud.txt", data_square)
 	mean_value = np.mean(data_square)
 	print "Not Loud Audio value  :"+ str(audio)+ "  : ", mean_value
+	file2.write("Not Loud Audio value  :"+ str(audio)+ "  : %f" %mean_value)
+	file2.write("\n")
 	average_values = np.append(average_values, mean_value)
 	# print average_values
 	# print average_values
+file2.close()
 avg2 = np.mean(average_values)
 print "============================================================"
 print "The average of the not loud means is :", avg2

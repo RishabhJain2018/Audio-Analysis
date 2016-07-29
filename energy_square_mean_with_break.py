@@ -26,7 +26,7 @@ def loud_cal(filename):
 	absolute_value = np.absolute(data, dtype='float64')
 	data_square = absolute_value**2
 	mean_value = np.mean(data_square)
-	print "The average of 5  seconds is : ", mean_value
+	# print "The average of 5  seconds is : ", mean_value
 	return mean_value
 
 
@@ -37,10 +37,10 @@ for extension in extension_list:
 		file1.write("\n")
 		song = AudioSegment.from_mp3(aud)
 		t = song.duration_seconds
-		print  "Time of Audio :" + str(aud)+ " : ",t
+		# print  "Time of Audio :" + str(aud)+ " : ",t
 		t = int(t*1000)
-		file1.write("time = %f " %t)
-		file1.write("\n")
+		# file1.write("time = %f " %t)
+		# file1.write("\n")
 		l = np.array((0), dtype='float64')
 		i = 0
 		while(i<=t):
@@ -48,16 +48,16 @@ for extension in extension_list:
 				extract = song[i:i+5000]
 				extract.export(path+"test"+str(i)+".mp3", format="mp3")
 				mean_value = loud_cal(path+"test"+str(i)+".mp3")
-				file1.write("The average of seconds is : %f" %mean_value)
-				file1.write("\n")
+				# file1.write("The average of 5 seconds is : %f" %mean_value)
+				# file1.write("\n")
 				l = np.append(l, mean_value)
 			elif ((i+5000) > t):
 				extract = song[i:t]
 				extract.export(path+"test"+str(i)+".mp3", format="mp3")
 				mean_value = loud_cal(path+"test"+str(i)+".mp3")
 				l = np.append(l, mean_value)
-				file1.write("The average of seconds is : %f" %mean_value)
-				file1.write("\n")
+				# file1.write("The average of 5 seconds is : %f" %mean_value)
+				# file1.write("\n")
 				break
 			i+=5000
 		final_mean = np.mean(l)
@@ -72,11 +72,11 @@ file1.close()
 os.chdir(base_path_no_loud)
 for extension in extension_list:
 	for aud in glob.glob(extension):
-		file2.write("Audio Sample %s" %aud)
-		file2.write("\n")
+		# file2.write("Audio Sample %s" %aud)
+		# file2.write("\n")
 		song = AudioSegment.from_mp3(aud)
 		t = song.duration_seconds
-		print  "Time of Audio :" + str(aud)+ " : ",t
+		# print  "Time of Audio :" + str(aud)+ " : ",t
 		t = int(t*1000)
 		file2.write("time = %f " %t)
 		file2.write("\n")
@@ -87,16 +87,16 @@ for extension in extension_list:
 				extract = song[i:i+5000]
 				extract.export(path+"test"+str(i)+".mp3", format="mp3")
 				mean_value = loud_cal(path+"test"+str(i)+".mp3")
-				file2.write("The average of seconds is : %f" %mean_value)
-				file2.write("\n")
+				# file2.write("The average of 5 seconds is : %f" %mean_value)
+				# file2.write("\n")
 				l = np.append(l, mean_value)
 			elif ((i+5000) > t):
 				extract = song[i:t]
 				extract.export(path+"test"+str(i)+".mp3", format="mp3")
 				mean_value = loud_cal(path+"test"+str(i)+".mp3")
 				l = np.append(l, mean_value)
-				file2.write("The average of seconds is : %f" %mean_value)
-				file2.write("\n")
+				# file2.write("The average of 5 seconds is : %f" %mean_value)
+				# file2.write("\n")
 				break
 			i+=5000
 		final_mean = np.mean(l)
@@ -104,7 +104,7 @@ for extension in extension_list:
 		mean_value2 = np.mean(compare_value2)
 		file2.write("Final Mean of Loud audio : "+str(aud)+" : %f" %final_mean)
 		file2.write("\n")
-		print "Final Mean of Loud audio : "+str(aud)+" : ", final_mean
+		print "Final Mean of Not Loud audio : "+str(aud)+" : ", final_mean
 		print "\n"
 file2.close()
 

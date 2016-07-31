@@ -31,7 +31,6 @@ def moving_average(a, n=3) :
 
 t_chunks = 5
 
-
 def loud_cal(filename):
 	final_mean = np.array((0), dtype='float64')
 	y, sr = librosa.load(filename)
@@ -49,8 +48,6 @@ def loud_cal(filename):
 	final_mean_value = np.mean(final_mean)
 	return final_mean_value
 
-
-
 os.chdir(base_path_loud)
 for extension in extension_list:
 	for aud in glob.glob(extension):
@@ -61,7 +58,6 @@ for extension in extension_list:
 
 print "********************************************************************************"
 print "********************************************************************************"
-
 
 os.chdir(base_path_no_loud)
 for extension in extension_list:
@@ -75,7 +71,6 @@ for extension in extension_list:
 final_compare_value = (np.mean(compare_value1)+np.mean(compare_value2))/2
 print "\n "
 print "Final compare value is ", final_compare_value 
-
 
 # file1.write("Audio Sample %s" %aud)
 # file1.write("\n")
